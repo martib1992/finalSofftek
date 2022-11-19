@@ -1,17 +1,28 @@
+let pass=false
+let modalInstance;
+     
+let modelElem = document.getElementById('exampleModal');
+modelElem.addEventListener('shown.bs.modal', function (){
+ modalInstance = bootstrap.Modal.getInstance(modelElem);
+  
+
+});
+
+
+
 let buscar = document.getElementById("buscar")
 buscar.addEventListener("click", buscarData)
 
-let buscarProvedor = document.getElementById("buscarProvedor")
-buscar.addEventListener("click", buscarProvedor)
+let spinner = document.getElementById("spinner")
+let tablaStockCompleto = document.getElementById("tablaStockCompleto")
+let tablaStock = document.getElementById("tablaStock")
+ 
 
 
 function buscarData() {
 
 
-    let spinner = document.getElementById("spinner")
-
-    let tablaStockCompleto = document.getElementById("tablaStockCompleto")
-    let tablaStock = document.getElementById("tablaStock")
+   
 
     spinner.style.display = "block";
     tablaStockCompleto.style.display = "none";
@@ -107,3 +118,59 @@ const mostrarSubLista = (data) => {
     }
     document.getElementById('sub-categorias').innerHTML = subCategorias
 }
+
+
+//En caso de provedor
+
+let ingresar = document.getElementById("ingresar")
+
+let password = document.getElementById('password')
+let invalido = document.getElementById("invalido")
+
+
+ingresar.addEventListener("click", ingresarContrasena)
+password.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        ingresarContrasena()
+    }
+});
+
+
+
+
+function ingresarContrasena() {
+    let passwordValue = password.value
+ 
+if ( passwordValue == 'a')
+ {   
+       
+    invalido.style.display = "none";
+    spinner.style.display = "block";
+   
+    tablaStock.style.display = "none";
+    tablaStockCompleto.style.display = "none";
+  
+
+    /* Aca va la logica si encuentra o no encuentra hay que modificar */
+    password.classList.remove("checked");
+
+
+    modalInstance.hide()
+    
+    pass=true
+    if (pass){
+        spinner.style.display = "none";
+        pass=false
+        location.href='index.html#Cliente'
+       
+    }
+  
+ 
+}
+else{
+    invalido.style.display = "block";
+    password.classList.add("checked");
+}
+}
+
+
